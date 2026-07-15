@@ -68,7 +68,7 @@ function draw(){
 
     ctx.fillStyle="deepskyblue";
     ctx.beginPath();
-    ctx.arc(earthX,earthY,10,0,Math.PI*2);
+    ctx.arc(earthX,earthY,20,0,Math.PI*2);
     ctx.fill();
 
     // 月軌道
@@ -83,7 +83,7 @@ function draw(){
 
     ctx.fillStyle="white";
     ctx.beginPath();
-    ctx.arc(moonX,moonY,5,0,Math.PI*2);
+    ctx.arc(moonX,moonY,10,0,Math.PI*2);
     ctx.fill();
 
     requestAnimationFrame(draw);
