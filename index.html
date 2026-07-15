@@ -40,10 +40,24 @@ function draw(){
     // 現在時刻
     const now=new Date();
 
-    // 地球（365日で1周）
-    const earthAngle=
-        ((now.getTime()/1000)/(365.2422*24*3600))
-        *Math.PI*2;
+    // J2000.0からの経過日数
+const JD = now.getTime() / 86400000 + 2440587.5;
+const d = JD - 2451545.0;
+
+// 地球の平均黄経
+const L = (280.460 + 0.9856474 * d) % 360;
+
+// 地球の平均近点角
+const g = (357.528 + 0.9856003 * d) % 360;
+
+// 太陽の黄経
+const lambda =
+    L +
+    1.915 * Math.sin(g * Math.PI / 180) +
+    0.020 * Math.sin(2 * g * Math.PI / 180);
+
+// 地球は太陽の反対側にある
+const earthAngle = (lambda + 180) * Math.PI / 180;
 
     // 月（27.32日で1周）
     const moonAngle=
