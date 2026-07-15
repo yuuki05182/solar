@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>太陽・地球・月</title>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+}
+
+canvas{
+    display:block;
+    margin:auto;
+    background:#000;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="space" width="800" height="600"></canvas>
+
+<script>
+
+const canvas=document.getElementById("space");
+const ctx=canvas.getContext("2d");
+
+const sunX=150;
+const sunY=300;
+
+const earthOrbit=220;
+const moonOrbit=40;
+
+function draw(){
+
+    ctx.clearRect(0,0,800,600);
+
+    // 現在時刻
+    const now=new Date();
+
+    // 地球（365日で1周）
+    const earthAngle=
+        ((now.getTime()/1000)/(365.2422*24*3600))
+        *Math.PI*2;
+
+    // 月（27.32日で1周）
+    const moonAngle=
+        ((now.getTime()/1000)/(27.3217*24*3600))
+        *Math.PI*2;
+
+    // 太陽
+    ctx.fillStyle="yellow";
+    ctx.beginPath();
+    ctx.arc(sunX,sunY,30,0,Math.PI*2);
+    ctx.fill();
+
+    // 地球軌道
+    ctx.strokeStyle="gray";
+    ctx.beginPath();
+    ctx.arc(sunX,sunY,earthOrbit,0,Math.PI*2);
+    ctx.stroke();
+
+    // 地球
+    const earthX=sunX+Math.cos(earthAngle)*earthOrbit;
+    const earthY=sunY+Math.sin(earthAngle)*earthOrbit;
+
+    ctx.fillStyle="deepskyblue";
+    ctx.beginPath();
+    ctx.arc(earthX,earthY,10,0,Math.PI*2);
+    ctx.fill();
+
+    // 月軌道
+    ctx.strokeStyle="#555";
+    ctx.beginPath();
+    ctx.arc(earthX,earthY,moonOrbit,0,Math.PI*2);
+    ctx.stroke();
+
+    // 月
+    const moonX=earthX+Math.cos(moonAngle)*moonOrbit;
+    const moonY=earthY+Math.sin(moonAngle)*moonOrbit;
+
+    ctx.fillStyle="white";
+    ctx.beginPath();
+    ctx.arc(moonX,moonY,5,0,Math.PI*2);
+    ctx.fill();
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+
+</script>
+
+</body>
+</html>
