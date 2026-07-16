@@ -72,13 +72,7 @@ const moonM = (134.963 + 13.064993 * moonDays) % 360;
 const moonLambda =
     moonL +
     6.289 * Math.sin(moonM * Math.PI / 180);
-
-// 月の黄経（絶対角度）
-const moonAngle = moonLambda * Math.PI / 180;
-
-// 地球の黄経（絶対角度）
-const earthAngle = (lambda + 180) * Math.PI / 180;
-  
+ 
 // 月の角度（度）
 const moonAngleDeg = (moonLambda - lambda + 360) % 360;
     
@@ -110,11 +104,14 @@ const moonAngleDeg = (moonLambda - lambda + 360) % 360;
     ctx.stroke();
 
     // 月
-    const moonX =
-    earthX + Math.cos(moonAngle - earthAngle) * moonOrbit;
+    const moonRelativeAngle =
+(moonLambda - lambda) * Math.PI / 180;
 
-    const moonY =
-    earthY + Math.sin(moonAngle - earthAngle) * moonOrbit;
+const moonX =
+earthX + Math.cos(moonRelativeAngle) * moonOrbit;
+
+const moonY =
+earthY + Math.sin(moonRelativeAngle) * moonOrbit;
 
     ctx.fillStyle="white";
     ctx.beginPath();
