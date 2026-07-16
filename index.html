@@ -104,8 +104,8 @@ const moonAngle = (moonLambda - lambda + 180) * Math.PI / 180;
     ctx.stroke();
 
     // 月
-    const moonX = earthX + Math.cos(moonRelativeAngle) * moonOrbit;
-    const moonY = earthY + Math.sin(moonRelativeAngle) * moonOrbit;
+    const moonX = earthX + Math.cos(moonAngle) * moonOrbit;
+    const moonY = earthY + Math.sin(moonAngle) * moonOrbit;
 
     ctx.fillStyle="white";
     ctx.beginPath();
