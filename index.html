@@ -59,10 +59,22 @@ const lambda =
 // 地球は太陽の反対側にある
 const earthAngle = (lambda + 180) * Math.PI / 180;
 
-    // 月（27.32日で1周）
-    const moonAngle=
-        ((now.getTime()/1000)/(27.3217*24*3600))
-        *Math.PI*2;
+    // J2000.0からの経過日数
+const moonDays = d;
+
+// 月の平均黄経
+const moonL = (218.316 + 13.176396 * moonDays) % 360;
+
+// 月の平均近点角
+const moonM = (134.963 + 13.064993 * moonDays) % 360;
+
+// 月の黄経（簡易式）
+const moonLambda =
+    moonL +
+    6.289 * Math.sin(moonM * Math.PI / 180);
+
+// 月の角度
+const moonAngle = moonLambda * Math.PI / 180;
 
     // 太陽
     ctx.fillStyle="yellow";
