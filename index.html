@@ -74,8 +74,9 @@ const moonLambda =
     6.289 * Math.sin(moonM * Math.PI / 180);
 
 // 月の角度
-const moonAngle = (moonLambda - lambda + 180) * Math.PI / 180;
-
+const moonRelativeAngle = (moonLambda - lambda) * Math.PI / 180;
+const moonAngle = earthAngle + moonRelativeAngle;
+  
 // 月の角度（度）
 const moonAngleDeg = (moonLambda - lambda + 360) % 360;
     
