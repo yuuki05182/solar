@@ -76,6 +76,9 @@ const moonLambda =
 // 月の角度
 const moonAngle = (moonLambda - lambda + 180) * Math.PI / 180;
 
+// 月の角度（度）
+const moonAngleDeg = (moonLambda - lambda + 360) % 360;
+    
     // 太陽
     ctx.fillStyle="yellow";
     ctx.beginPath();
@@ -111,6 +114,9 @@ const moonAngle = (moonLambda - lambda + 180) * Math.PI / 180;
     ctx.beginPath();
     ctx.arc(moonX,moonY,10,0,Math.PI*2);
     ctx.fill();
+    ctx.fillStyle = "white";
+    ctx.font = "20px sans-serif";
+    ctx.fillText("Moon Angle: " + moonAngleDeg.toFixed(1) + "°", 20, 30);
 
     requestAnimationFrame(draw);
 }
