@@ -31,6 +31,15 @@ const ctx = canvas.getContext("2d");
 const sunX = canvas.width / 2;
 const sunY = canvas.height / 2;
 
+// ★追加
+let astroData = null;
+
+async function loadData() {
+    const res = await fetch("https://astro-proxy.y-imamine43.workers.dev/astro");
+    astroData = await res.json();
+    console.log(astroData);
+}
+
 // 太陽を描く
 ctx.fillStyle = "yellow";
 ctx.beginPath();
@@ -73,6 +82,8 @@ ctx.fillStyle = "white";
 ctx.beginPath();
 ctx.arc(moonX, moonY, 8, 0, Math.PI * 2);
 ctx.fill();
+
+loadData();
 
 </script>
 
