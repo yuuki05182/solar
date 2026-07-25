@@ -33,6 +33,7 @@ const sunY = canvas.height / 2;
 
 // ★追加
 let astroData = null;
+let earthAngle = 0;
 
 async function loadData() {
     alert("loadData開始");
@@ -48,6 +49,9 @@ async function loadData() {
 
         const earth = astroData.objects.find(o => o.type === "Earth");
         console.log(earth);
+
+        earthAngle =
+        earth.earthAngle * Math.PI / 180;
 
     } catch(e) {
         alert(e);
@@ -68,7 +72,6 @@ ctx.stroke();
 
 // 地球（仮）
 const earthOrbit = 220;
-const earthAngle = 0;
 
 const earthX = sunX + Math.cos(earthAngle) * earthOrbit;
 const earthY = sunY + Math.sin(earthAngle) * earthOrbit;
