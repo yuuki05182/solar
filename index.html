@@ -58,48 +58,50 @@ async function loadData() {
     }
 }
 
-// 太陽を描く
-ctx.fillStyle = "yellow";
-ctx.beginPath();
-ctx.arc(sunX, sunY, 30, 0, Math.PI * 2);
-ctx.fill();
+function draw() {
 
-// 地球の軌道
-ctx.strokeStyle = "gray";
-ctx.beginPath();
-ctx.arc(sunX, sunY, 220, 0, Math.PI * 2);
-ctx.stroke();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-// 地球（仮）
-const earthOrbit = 220;
+    // 太陽
+    ctx.fillStyle = "yellow";
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, 30, 0, Math.PI * 2);
+    ctx.fill();
 
-const earthX = sunX + Math.cos(earthAngle) * earthOrbit;
-const earthY = sunY + Math.sin(earthAngle) * earthOrbit;
+    // 地球軌道
+    ctx.strokeStyle = "gray";
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, 220, 0, Math.PI * 2);
+    ctx.stroke();
 
-ctx.fillStyle = "deepskyblue";
-ctx.beginPath();
-ctx.arc(earthX, earthY, 15, 0, Math.PI * 2);
-ctx.fill();
+    // 地球
+    const earthOrbit = 220;
 
-// 月の軌道
-ctx.strokeStyle = "#666";
-ctx.lineWidth = 1;
-ctx.beginPath();
-ctx.arc(earthX, earthY, 40, 0, Math.PI * 2);
-ctx.stroke();
+    const earthX = sunX + Math.cos(earthAngle) * earthOrbit;
+    const earthY = sunY + Math.sin(earthAngle) * earthOrbit;
 
-// 月（仮）
-const moonOrbit = 40;
-const moonAngle = 0;
+    ctx.fillStyle = "deepskyblue";
+    ctx.beginPath();
+    ctx.arc(earthX, earthY, 15, 0, Math.PI * 2);
+    ctx.fill();
 
-const moonX = earthX + Math.cos(moonAngle) * moonOrbit;
-const moonY = earthY + Math.sin(moonAngle) * moonOrbit;
+    // 月軌道
+    ctx.strokeStyle = "#666";
+    ctx.beginPath();
+    ctx.arc(earthX, earthY, 40, 0, Math.PI * 2);
+    ctx.stroke();
 
-ctx.fillStyle = "white";
-ctx.beginPath();
-ctx.arc(moonX, moonY, 8, 0, Math.PI * 2);
-ctx.fill();
+    // 仮の月
+    const moonX = earthX + 40;
+    const moonY = earthY;
 
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.arc(moonX, moonY, 8, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+draw();
 loadData();
 
 </script>
