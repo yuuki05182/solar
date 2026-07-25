@@ -35,9 +35,19 @@ const sunY = canvas.height / 2;
 let astroData = null;
 
 async function loadData() {
-    const res = await fetch("https://astro-proxy.y-imamine43.workers.dev/astro");
-    astroData = await res.json();
-    console.log(astroData);
+    alert("loadData開始");
+
+    try {
+        const res = await fetch("https://astro-proxy.y-imamine43.workers.dev/astro");
+        alert("fetch成功");
+
+        astroData = await res.json();
+        alert("JSON取得成功");
+
+        console.log(astroData);
+    } catch(e) {
+        alert(e);
+    }
 }
 
 // 太陽を描く
