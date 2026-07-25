@@ -62,6 +62,18 @@ ctx.beginPath();
 ctx.arc(earthX, earthY, 40, 0, Math.PI * 2);
 ctx.stroke();
 
+// 月（仮）
+const moonOrbit = 40;
+const moonAngle = 0;
+
+const moonX = earthX + Math.cos(moonAngle) * moonOrbit;
+const moonY = earthY + Math.sin(moonAngle) * moonOrbit;
+
+ctx.fillStyle = "white";
+ctx.beginPath();
+ctx.arc(moonX, moonY, 8, 0, Math.PI * 2);
+ctx.fill();
+
 </script>
 
 </body>
