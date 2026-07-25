@@ -45,6 +45,10 @@ async function loadData() {
         alert("JSON取得成功");
 
         console.log(astroData);
+
+        const earth = astroData.objects.find(o => o.type === "Earth");
+        console.log(earth);
+
     } catch(e) {
         alert(e);
     }
