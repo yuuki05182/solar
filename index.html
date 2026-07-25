@@ -43,6 +43,18 @@ ctx.beginPath();
 ctx.arc(sunX, sunY, 220, 0, Math.PI * 2);
 ctx.stroke();
 
+// 地球（仮）
+const earthOrbit = 220;
+const earthAngle = 0;
+
+const earthX = sunX + Math.cos(earthAngle) * earthOrbit;
+const earthY = sunY + Math.sin(earthAngle) * earthOrbit;
+
+ctx.fillStyle = "deepskyblue";
+ctx.beginPath();
+ctx.arc(earthX, earthY, 15, 0, Math.PI * 2);
+ctx.fill();
+
 </script>
 
 </body>
