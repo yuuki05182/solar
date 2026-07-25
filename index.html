@@ -81,8 +81,8 @@ function draw() {
     // 地球
     const earthOrbit = 220;
 
-    const earthX = sunX + Math.cos(earthAngle) * earthOrbit;
-    const earthY = sunY + Math.sin(earthAngle) * earthOrbit;
+    const earthX = sunX + Math.cos(-earthAngle) * earthOrbit;
+    const earthY = sunY + Math.sin(-earthAngle) * earthOrbit;
 
     ctx.fillStyle = "deepskyblue";
     ctx.beginPath();
