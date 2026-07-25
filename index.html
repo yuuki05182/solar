@@ -37,6 +37,12 @@ ctx.beginPath();
 ctx.arc(sunX, sunY, 30, 0, Math.PI * 2);
 ctx.fill();
 
+// 地球の軌道
+ctx.strokeStyle = "gray";
+ctx.beginPath();
+ctx.arc(sunX, sunY, 220, 0, Math.PI * 2);
+ctx.stroke();
+
 </script>
 
 </body>
