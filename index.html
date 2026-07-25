@@ -55,6 +55,13 @@ ctx.beginPath();
 ctx.arc(earthX, earthY, 15, 0, Math.PI * 2);
 ctx.fill();
 
+// 月の軌道
+ctx.strokeStyle = "#666";
+ctx.lineWidth = 1;
+ctx.beginPath();
+ctx.arc(earthX, earthY, 40, 0, Math.PI * 2);
+ctx.stroke();
+
 </script>
 
 </body>
