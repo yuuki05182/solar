@@ -16,115 +16,26 @@ canvas{
     background:#000;
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <canvas id="space" width="800" height="600"></canvas>
 
 <script>
 
-const canvas=document.getElementById("space");
-const ctx=canvas.getContext("2d");
+const canvas = document.getElementById("space");
+const ctx = canvas.getContext("2d");
 
+// 太陽の位置
 const sunX = canvas.width / 2;
 const sunY = canvas.height / 2;
 
-const earthOrbit=220;
-const moonOrbit=40;
-
-function draw(){
-
-    ctx.clearRect(0,0,800,600);
-
-    // 現在時刻
-    const now=new Date();
-
-    // J2000.0からの経過日数
-const JD = now.getTime() / 86400000 + 2440587.5;
-const d = JD - 2451545.0;
-
-// 地球の平均黄経
-const L = (280.460 + 0.9856474 * d) % 360;
-
-// 地球の平均近点角
-const g = (357.528 + 0.9856003 * d) % 360;
-
-// 太陽の黄経
-const lambda =
-    L +
-    1.915 * Math.sin(g * Math.PI / 180) +
-    0.020 * Math.sin(2 * g * Math.PI / 180);
-
-// 地球は太陽の反対側にある
-const earthAngle = (lambda + 180) * Math.PI / 180;
-
-    // J2000.0からの経過日数
-const moonDays = d;
-
-// 月の平均黄経
-const moonL = (218.316 + 13.176396 * moonDays) % 360;
-
-// 月の平均近点角
-const moonM = (134.963 + 13.064993 * moonDays) % 360;
-
-// 月の黄経（簡易式）
-const moonLambda =
-    moonL +
-    6.289 * Math.sin(moonM * Math.PI / 180);
- 
-// 月の角度（度）
-const moonAngleDeg = (moonLambda - lambda + 360) % 360;
-    
-    // 太陽
-    ctx.fillStyle="yellow";
-    ctx.beginPath();
-    ctx.arc(sunX,sunY,30,0,Math.PI*2);
-    ctx.fill();
-
-    // 地球軌道
-    ctx.strokeStyle="gray";
-    ctx.beginPath();
-    ctx.arc(sunX,sunY,earthOrbit,0,Math.PI*2);
-    ctx.stroke();
-
-    // 地球
-    const earthX=sunX+Math.cos(earthAngle)*earthOrbit;
-    const earthY=sunY+Math.sin(earthAngle)*earthOrbit;
-
-    ctx.fillStyle="deepskyblue";
-    ctx.beginPath();
-    ctx.arc(earthX,earthY,20,0,Math.PI*2);
-    ctx.fill();
-
-    // 月軌道
-    ctx.strokeStyle="#555";
-    ctx.beginPath();
-    ctx.arc(earthX,earthY,moonOrbit,0,Math.PI*2);
-    ctx.stroke();
-
-    // 月
-    const moonRelativeAngle =
-(moonLambda - lambda) * Math.PI / 180;
-
-const moonX =
-earthX + Math.cos(moonRelativeAngle) * moonOrbit;
-
-const moonY =
-earthY + Math.sin(moonRelativeAngle) * moonOrbit;
-
-    ctx.fillStyle="white";
-    ctx.beginPath();
-    ctx.arc(moonX,moonY,10,0,Math.PI*2);
-    ctx.fill();
-    ctx.fillStyle = "white";
-    ctx.font = "20px sans-serif";
-    ctx.fillText("Moon Angle: " + moonAngleDeg.toFixed(1) + "°", 20, 30);
-
-    requestAnimationFrame(draw);
-}
-
-draw();
+// 太陽を描く
+ctx.fillStyle = "yellow";
+ctx.beginPath();
+ctx.arc(sunX, sunY, 30, 0, Math.PI * 2);
+ctx.fill();
 
 </script>
 
