@@ -34,6 +34,7 @@ const sunY = canvas.height / 2;
 // ★追加
 let astroData = null;
 let earthAngle = 0;
+let moonAngle = 0;
 
 async function loadData() {
     alert("loadData開始");
@@ -49,9 +50,10 @@ async function loadData() {
 
         const earth = astroData.objects.find(o => o.type === "Earth");
         console.log(earth);
+        const moon = astroData.objects.find(o => o.type === "Moon");
 
-        earthAngle =
-        earth.earthAngle * Math.PI / 180;
+        earthAngle = earth.earthAngle * Math.PI / 180;
+        moonAngle = moon.moonAngle * Math.PI / 180;
 
         alert(earthAngle);
 
@@ -95,9 +97,11 @@ function draw() {
     ctx.arc(earthX, earthY, 40, 0, Math.PI * 2);
     ctx.stroke();
 
-    // 仮の月
-    const moonX = earthX + 40;
-    const moonY = earthY;
+    // 月
+    const moonOrbit = 40;
+
+    const moonX = earthX + Math.cos(-moonAngle) * moonOrbit;
+    const moonY = earthY + Math.sin(-moonAngle) * moonOrbit;
 
     ctx.fillStyle = "white";
     ctx.beginPath();
