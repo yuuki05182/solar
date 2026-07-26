@@ -53,8 +53,7 @@ async function loadData() {
         const moon = astroData.objects.find(o => o.type === "Moon");
 
         earthAngle = earth.earthAngle * Math.PI / 180;
-        moonAngle = moon.moonAngle * Math.PI / 180;
-
+        moonAngle = moon.relativeMoonAngle * Math.PI / 180;
         alert(earthAngle);
 
         draw();
@@ -100,7 +99,7 @@ function draw() {
     // 月
     const moonOrbit = 40;
 
-    const relativeMoonAngle = moonAngle - earthAngle;
+    const relativeMoonAngle = moonAngle;
 
     const moonX = earthX + Math.cos(relativeMoonAngle) * 40;
     const moonY = earthY - Math.sin(relativeMoonAngle) * 40;
