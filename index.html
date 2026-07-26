@@ -100,8 +100,10 @@ function draw() {
     // 月
     const moonOrbit = 40;
 
-    const moonX = earthX + Math.cos(-moonAngle) * moonOrbit;
-    const moonY = earthY + Math.sin(-moonAngle) * moonOrbit;
+    const relativeMoonAngle = moonAngle - earthAngle;
+
+    const moonX = earthX + Math.cos(relativeMoonAngle) * 40;
+    const moonY = earthY - Math.sin(relativeMoonAngle) * 40;
 
     ctx.fillStyle = "white";
     ctx.beginPath();
