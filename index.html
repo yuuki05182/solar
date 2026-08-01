@@ -1,118 +1,116 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title>太陽・地球・月</title>
-
-<style>
-body{
-    margin:0;
-    background:#000;
-}
-
-canvas{
-    display:block;
-    margin:auto;
-    background:#000;
-}
-</style>
-
-</head>
-<body>
-
-<canvas id="space" width="800" height="600"></canvas>
-
-<script>
-
-const canvas = document.getElementById("space");
-const ctx = canvas.getContext("2d");
-
-// 太陽の位置
-const sunX = canvas.width / 2;
-const sunY = canvas.height / 2;
-
-// ★追加
-let astroData = null;
-let earthAngle = 0;
-let moonAngle = 0;
-
-async function loadData() {
-    alert("loadData開始");
-
-    try {
-        const res = await fetch("https://astro-proxy.y-imamine43.workers.dev/astro");
-        alert("fetch成功");
-
-        astroData = await res.json();
-        alert("JSON取得成功");
-
-        console.log(astroData);
-
-        const earth = astroData.objects.find(o => o.type === "Earth");
-        console.log(earth);
-        const moon = astroData.objects.find(o => o.type === "Moon");
-
-        earthAngle = earth.earthAngle * Math.PI / 180;
-        moonAngle = moon.relativeMoonAngle * Math.PI / 180;
-        alert(earthAngle);
-
-        draw();
-
-    } catch(e) {
-        alert(e);
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+    <meta charset="UTF-8">
+    <title>太陽・地球・月</title>
+    
+    <style>
+    body{
+        margin:0;
+        background:#000;
     }
-}
-
-function draw() {
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // 太陽
-    ctx.fillStyle = "yellow";
-    ctx.beginPath();
-    ctx.arc(sunX, sunY, 30, 0, Math.PI * 2);
-    ctx.fill();
-
-    // 地球軌道
-    ctx.strokeStyle = "gray";
-    ctx.beginPath();
-    ctx.arc(sunX, sunY, 220, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // 地球
-    const earthOrbit = 220;
-
-    const earthX = sunX + Math.cos(-earthAngle) * earthOrbit;
-    const earthY = sunY + Math.sin(-earthAngle) * earthOrbit;
-
-    ctx.fillStyle = "deepskyblue";
-    ctx.beginPath();
-    ctx.arc(earthX, earthY, 15, 0, Math.PI * 2);
-    ctx.fill();
-
-    // 月軌道
-    ctx.strokeStyle = "#666";
-    ctx.beginPath();
-    ctx.arc(earthX, earthY, 40, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // 月
-    const moonOrbit = 40;
-
-    const relativeMoonAngle = moonAngle;
-
-    const moonX = earthX + Math.cos(relativeMoonAngle) * 40;
-    const moonY = earthY - Math.sin(relativeMoonAngle) * 40;
-
-    ctx.fillStyle = "white";
-    ctx.beginPath();
-    ctx.arc(moonX, moonY, 8, 0, Math.PI * 2);
-    ctx.fill();
-}
-
-loadData();
-
-</script>
-
-</body>
-</html>
+    
+    canvas{
+        display:block;
+        margin:auto;
+        background:#000;
+    }
+    </style>
+    
+    </head>
+    <body>
+    
+    <canvas id="space" width="800" height="600"></canvas>
+    
+    <script>
+    
+    const canvas = document.getElementById("space");
+    const ctx = canvas.getContext("2d");
+    
+    // 太陽の位置
+    const sunX = canvas.width / 2;
+    const sunY = canvas.height / 2;
+    
+    // ★追加
+    let astroData = null;
+    let earthAngle = 0;
+    let moonAngle = 0;
+    
+    async function loadData() {
+        alert("loadData開始");
+    
+        try {
+            const res = await fetch("https://astro-proxy.y-imamine43.workers.dev/astro");
+            alert("fetch成功");
+    
+            astroData = await res.json();
+            alert("JSON取得成功");
+    
+            console.log(astroData);
+    
+            const earth = astroData.objects.find(o => o.type === "Earth");
+            console.log(earth);
+            const moon = astroData.objects.find(o => o.type === "Moon");
+    
+            earthAngle = earth.earthAngle * Math.PI / 180;
+            moonAngle = moon.relativeMoonAngle * Math.PI / 180;
+            alert(earthAngle);
+    
+            draw();
+    
+        } catch(e) {
+            alert(e);
+        }
+    }
+    
+    function draw() {
+    
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+        // 太陽
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.arc(sunX, sunY, 30, 0, Math.PI * 2);
+        ctx.fill();
+    
+        // 地球軌道
+        ctx.strokeStyle = "gray";
+        ctx.beginPath();
+        ctx.arc(sunX, sunY, 220, 0, Math.PI * 2);
+        ctx.stroke();
+    
+        // 地球
+        const earthOrbit = 220;
+    
+        const earthX = sunX + Math.cos(-earthAngle) * earthOrbit;
+        const earthY = sunY + Math.sin(-earthAngle) * earthOrbit;
+    
+        ctx.fillStyle = "deepskyblue";
+        ctx.beginPath();
+        ctx.arc(earthX, earthY, 15, 0, Math.PI * 2);
+        ctx.fill();
+    
+        // 月軌道
+        ctx.strokeStyle = "#666";
+        ctx.beginPath();
+        ctx.arc(earthX, earthY, 40, 0, Math.PI * 2);
+        ctx.stroke();
+    
+        // 月
+        const moonOrbit = 40;
+    
+        const moonX = earthX + Math.cos(-moonAngle) * 40;
+        const moonY = earthY + Math.sin(-moonAngle) * 40;
+    
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        ctx.arc(moonX, moonY, 8, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    
+    loadData();
+    
+    </script>
+    
+    </body>
+    </html>
