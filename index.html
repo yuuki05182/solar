@@ -64,6 +64,17 @@
     }
     
     function draw() {
+
+    const now = new Date();
+
+// UTC時刻（時間）
+const utcHours =
+    now.getUTCHours() +
+    now.getUTCMinutes() / 60 +
+    now.getUTCSeconds() / 3600;
+
+// 地球は24時間で360°回転
+const rotationAngle = utcHours / 24 * Math.PI * 2;
     
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     
@@ -89,6 +100,26 @@
         ctx.beginPath();
         ctx.arc(earthX, earthY, 15, 0, Math.PI * 2);
         ctx.fill();
+
+        // 日本（赤い点）
+const earthRadius = 15;
+
+// 日本の位置（北緯36°・東経138°）
+const japanLongitude = 138 * Math.PI / 180;
+
+// 地球の自転を反映
+const japanAngle = rotationAngle + japanLongitude;
+
+const japanX =
+    earthX + Math.cos(japanAngle) * earthRadius;
+
+const japanY =
+    earthY - Math.sin(japanAngle) * earthRadius;
+
+ctx.fillStyle = "red";
+ctx.beginPath();
+ctx.arc(japanX, japanY, 2.5, 0, Math.PI * 2);
+ctx.fill();
     
         // 月軌道
         ctx.strokeStyle = "#666";
